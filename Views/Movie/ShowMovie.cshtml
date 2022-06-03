@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Html;
+@using MvcMovie.Models;
+@*
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	ViewBag.Title = "Tabella con i film disponibili";
+	ViewBag.TitoloPagina = "Il mio Movie Store";
+	Layout = "~/Views/Shared/_LayoutMovie.cshtml";
+	string[] TableHeaders = new string[] { "Poster", "MovieID", "Titolo", "Genere", "Prezzo" };
+}
+
+@{
+	Func<dynamic, IHtmlContent> StampaRiga(Movie mioMovie) =>
+	@<tr>
+		<td class="image"><img class="post-list-image" src="@mioMovie.Photo"></td>
+		<td>@mioMovie.Id</td>
+		<td>@mioMovie.Title</td>
+		<td>@mioMovie.Genre</td>
+		<td>@mioMovie.Price</td>
+	</tr>;
+}
+
+@{
+	Func<dynamic, IHtmlContent> StampaMainTitolo(string sTitolo) =>
+	@<h1>
+		@sTitolo
+	</h1>;
+}
+
+@StampaMainTitolo("Il mio Blog Personale")(null)
+
+<h2>Lista Movies il giorno @DateTime.Now.ToShortDateString()</h2>
+
+
+<div class="table">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				@{
+					foreach (var head in TableHeaders)
+					{
+						<th>
+							@head
+						</th>
+					}
+				}
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				string Titolo, MovieID, Genere, Prezzo, Foto;
+				if (Model != null)
+				{
+					foreach (var data in Model)
+					{
+						@StampaRiga((MvcMovie.Models.Movie)data)(null)
+
+						
+					}
+				}
+			}
+		</tbody>
+	</table>
+</div>

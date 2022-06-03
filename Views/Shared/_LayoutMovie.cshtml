@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Html
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+	<link href="~/css/site.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div>
+		<h1>@ViewBag.TitoloPagina</h1>
+		<h3><a asp-area="" asp-controller="Movie" asp-action="Index">Home</a></h3>
+		@RenderBody()
+	</div>
+</body>
+</html>
